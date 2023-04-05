@@ -12,11 +12,11 @@ class MatricesMultiply {
 
     checkMultiply() {
         this.rows = 0;
-        this.cols = m2[0].length;
+        this.cols = this.m2[0].length;
         let good = true;
 
         // проверяем на правильность матрицы
-        m1.forEach((row, i) => {
+        this.m1.forEach((row, i) => {
             let rowCell = 0;
             row.forEach((cell, i) => {
                 rowCell++;
@@ -36,7 +36,7 @@ class MatricesMultiply {
         }
         this.rows = 0;
 
-        m2.forEach((row, i) => {
+        this.m2.forEach((row, i) => {
             let rowCell = 0;
             row.forEach((cell, i) => {
                 rowCell++;
@@ -55,8 +55,8 @@ class MatricesMultiply {
             good = false;
         }
 
-        this.rows = m1[0].length;
-        this.cols = m2.length;
+        this.rows = this.m1[0].length;
+        this.cols = this.m2.length;
 
         if (this.rows !== this.cols) {
             console.log(this.rows, this.cols);
@@ -70,6 +70,7 @@ class MatricesMultiply {
                 this.result[i][j] = 0;
             }
         }
+        console.log(this.rows, this.cols);
         return good;
     }
 
@@ -112,5 +113,5 @@ const m2 = [
     [5, 5, 4]
 ];
 
-const m  = new MatricesMultiply(m1, m2);
+const m  = new MatricesMultiply(m2, m1);
 m.multiply();
