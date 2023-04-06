@@ -5,15 +5,18 @@ class Tenzor {
         this.tenzor = [];
     }
 
-    setTenzor(tenzor, deep) {
-        for (let i = 0; i < deep; i++) {
-            tenzor.push([]);
-            console.log(deep);
-            if (deep) {
-                this.setTenzor(tenzor[i], --deep);
+    setTenzor(tenzor) {
+        let levels = [...arguments];
+        tenzor = levels.shift();
+        let nowLevel = levels.shift();
+        if (levels.length) {
+            for (let i = 0; i < nowLevel; i++) {
+                tenzor[i] = [];
+                this.setTenzor(tenzor[i], ...levels);
             }
-            if (!tenzor[i]) {
-                tenzor[i] = 0;
+        } else {
+            for (let i = 0; i < nowLevel; i++) {
+                tenzor[i] = i;
             }
         }
     }
@@ -28,5 +31,9 @@ class Tenzor {
 }
 
 const t = new Tenzor();
-t.setTenzor(t.getTenzor(), 3);
+t.setTenzor(t.getTenzor(), 3, 4, 3, 5, 6);
 t.logTenzor();
+setTimeout(() => {
+    t.getTenzor()[0][1][2][3][4] = 124;
+    t.logTenzor();
+}, 10000)
